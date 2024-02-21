@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w25_g10.repositories;
 
 
 import com.example.be_java_hisp_w25_g10.dtos.DiscountProductsNumberDto;
+import com.example.be_java_hisp_w25_g10.dtos.PostPromoDto;
 import com.example.be_java_hisp_w25_g10.entities.Follower;
 import com.example.be_java_hisp_w25_g10.entities.Post;
 import com.example.be_java_hisp_w25_g10.entities.RolEnum;
@@ -69,7 +70,7 @@ public class Repository implements IRepository {
                 new Post(2,
                         users.stream().filter(u -> u.getId() == 1).findFirst().get(),
                         LocalDate.now().minusDays(19),
-                        new Product(1,
+                        new Product(2,
                                 123,
                                 29.99,
                                 "Producto2",
@@ -85,7 +86,7 @@ public class Repository implements IRepository {
                 new Post(3,
                         users.stream().filter(u -> u.getId() == 2).findFirst().get(),
                         LocalDate.now().minusDays(19),
-                        new Product(1,
+                        new Product(3,
                                 123,
                                 29.99,
                                 "Producto3",
@@ -98,6 +99,22 @@ public class Repository implements IRepository {
                         ),
                         false,
                         0.0
+
+                ),
+                new Post(4,
+                        users.stream().filter(u -> u.getId() == 1).findFirst().get(),
+                        LocalDate.now().minusDays(19),
+                        new Product(4,
+                                123,
+                                29.99,
+                                "Producto4",
+                                "Canasta familiar",
+                                "MarcaD",
+                                "Verde",
+                                "Paquete de 5"
+                        ),
+                        true,
+                        0.20
 
                 )
         }));
@@ -223,6 +240,17 @@ public class Repository implements IRepository {
             }
         }
     return name;
+    }
+
+    @Override
+    public List<Post> getPromoPost() {
+        List<Post> postsPromo = new ArrayList<>();
+        for(Post p : posts){
+            if(p.isHas_promo()==TRUE){
+                postsPromo.add(p);
+            }
+        }
+        return postsPromo;
     }
 }
 

@@ -119,6 +119,12 @@ public class PostService implements IPostService {
         return new DiscountProductsNumberDto(user_id, user_name, promo_products_count);
     }
 
+    @Override
+    public List<PostPromoDto> getPromoPost() {
+        List<Post> posts = repository.getPromoPost();
+        return PostMapper.ListToPromoDto(posts);
+    }
+
     private ProductDto convertToProductDto(Product product) {
         return new ProductDto(
                 product.getId(),

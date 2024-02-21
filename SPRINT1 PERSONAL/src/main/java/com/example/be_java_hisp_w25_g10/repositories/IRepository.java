@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w25_g10.repositories;
 
 import com.example.be_java_hisp_w25_g10.dtos.DiscountProductsNumberDto;
+import com.example.be_java_hisp_w25_g10.dtos.PostPromoDto;
 import com.example.be_java_hisp_w25_g10.entities.Follower;
 import com.example.be_java_hisp_w25_g10.entities.Post;
 import com.example.be_java_hisp_w25_g10.entities.User;
@@ -29,6 +30,7 @@ public interface IRepository {
     int getCountDiscountProducts(int user_id);
 
     String getSellerNameById (int user_id);
+    List <Post> getPromoPost ();
 
 
 

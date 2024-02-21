@@ -11,4 +11,5 @@ public interface IPostService {
     List<PostPromoDto> verPosts();
     ResponseDto createPromoPost(PostPromoDto post);
     DiscountProductsNumberDto getCountDiscountProducts(int user_id);
+    List<PostPromoDto> getPromoPost ();
 }

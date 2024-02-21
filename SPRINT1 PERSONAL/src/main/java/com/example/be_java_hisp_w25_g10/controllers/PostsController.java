@@ -60,6 +60,12 @@ public class PostsController {
 
         return new ResponseEntity<>(postService.getCountDiscountProducts(user_id), HttpStatus.CREATED);
     }
+    //Ver las lista de post en promoción
+    @GetMapping("/products/get-promo-post")
+    public ResponseEntity<?> getPromoPost (){
+
+        return new ResponseEntity<>(postService.getPromoPost(), HttpStatus.CREATED);
+    }
 
 
 }
