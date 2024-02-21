@@ -55,10 +55,10 @@ public class PostsController {
 
         return new ResponseEntity<>(postService.createPromoPost(newPost), HttpStatus.CREATED);
     }
-    @GetMapping("/products/promo-post/count/{userId}")
-    public ResponseEntity<?> getCountDiscountProducts (@PathVariable int userId){
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<?> getCountDiscountProducts (@RequestParam int user_id){
 
-        return new ResponseEntity<>(postService.getCountDiscountProducts(userId), HttpStatus.CREATED);
+        return new ResponseEntity<>(postService.getCountDiscountProducts(user_id), HttpStatus.CREATED);
     }
 
 
