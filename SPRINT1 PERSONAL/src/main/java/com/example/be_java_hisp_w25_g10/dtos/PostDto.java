@@ -7,6 +7,7 @@ public record PostDto(
         int userId,
         int postId,
         LocalDate date,
-        ProductDto product){
+        ProductDto product
+        ){
 
 }

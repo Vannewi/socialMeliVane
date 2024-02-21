@@ -1,12 +1,14 @@
 package com.example.be_java_hisp_w25_g10.repositories;
 
 
+import com.example.be_java_hisp_w25_g10.dtos.DiscountProductsNumberDto;
 import com.example.be_java_hisp_w25_g10.entities.Follower;
 import com.example.be_java_hisp_w25_g10.entities.Post;
 import com.example.be_java_hisp_w25_g10.entities.RolEnum;
 import com.example.be_java_hisp_w25_g10.entities.User;
 
 import com.example.be_java_hisp_w25_g10.entities.*;
+import org.springframework.http.server.DelegatingServerHttpResponse;
 
 import java.time.LocalDate;
 
@@ -59,7 +61,10 @@ public class Repository implements IRepository {
                                 "MarcaA",
                                 "Rojo",
                                 "Notas sobre el producto"
-                        )
+                        ),
+                        false,
+                        0.0
+
                 ),
                 new Post(2,
                         users.stream().filter(u -> u.getId() == 1).findFirst().get(),
@@ -72,8 +77,11 @@ public class Repository implements IRepository {
                                 "MarcaB",
                                 "Amarillo",
                                 "Notas sobre el producto"
-                        )
-                ),
+                        ),
+                false,
+                0.0
+
+        ),
                 new Post(3,
                         users.stream().filter(u -> u.getId() == 2).findFirst().get(),
                         LocalDate.now().minusDays(19),
@@ -85,7 +93,12 @@ public class Repository implements IRepository {
                                 "MarcaC",
                                 "Azul",
                                 "Notas sobre el producto"
-                        )
+
+
+                        ),
+                        false,
+                        0.0
+
                 )
         }));
 
@@ -173,7 +186,7 @@ public class Repository implements IRepository {
     public List<User>  getSellers(){
         List<User> sellers = new ArrayList<>();
         for (User u: users){
-            if (u.getRole().equals("SELLER")){
+            if (u.getRole() == RolEnum.SELLER){
                 sellers.add(u);
             }
         }
@@ -183,24 +196,33 @@ public class Repository implements IRepository {
     @Override
     public boolean validatePost (int id ){
         boolean  answer=FALSE;
-        //validaciones POST
 
         //validar si existe el usuario
-        for (User u: users){
-            if(u.getId()==id ){
-                answer=TRUE;
+        for (User u: users) {
+            if (u.getId() == id && u.getRole() == RolEnum.SELLER) {
+                answer = TRUE;
             }
         }
-        //validar si el usuario es vendedor
-
-
-        //validar si el proudcucto ya existe
-
-
-        //validar fecha
-
-
         return answer;
+    }
+
+    @Override
+    public int getCountDiscountProducts(int user_id) {
+        int counter;
+        List<Post> postOfUser = posts.stream()
+                .filter(p -> p.getUser().getId() == user_id).toList();
+
+        return postOfUser.size();
+    }
+
+    public String getSellerNameById (int id){
+        String name="";
+        for (User u: users){
+            if(u.getId()==id && u.getRole()== RolEnum.SELLER){
+                name=u.getName();
+            }
+        }
+    return name;
     }
 }
 

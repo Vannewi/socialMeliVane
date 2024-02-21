@@ -19,5 +19,7 @@ public class Post {
     private User user;
     private LocalDate date;
     private Product product;
+    private boolean has_promo;
+    private Double discount;
 }
 

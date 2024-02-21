@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w25_g10.repositories;
 
+import com.example.be_java_hisp_w25_g10.dtos.DiscountProductsNumberDto;
 import com.example.be_java_hisp_w25_g10.entities.Follower;
 import com.example.be_java_hisp_w25_g10.entities.Post;
 import com.example.be_java_hisp_w25_g10.entities.User;
@@ -20,10 +21,14 @@ public interface IRepository {
 
     List<Post> getFollowedPosts(int userId, String sortOrder);
     public Post addPost(Post newPost);
+
+
     public List<Post> verPost();
     List<User> getSellers();
     boolean validatePost (int id);
+    int getCountDiscountProducts(int user_id);
 
+    String getSellerNameById (int user_id);
 
 
 
